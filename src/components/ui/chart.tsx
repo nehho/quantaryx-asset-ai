@@ -1,3 +1,4 @@
+
 import * as React from "react"
 import * as RechartsPrimitive from "recharts"
 
@@ -36,7 +37,7 @@ const ChartContainer = React.forwardRef<
   HTMLDivElement,
   React.ComponentProps<"div"> & {
     config: ChartConfig
-    children: React.ReactNode | ((props: any) => React.ReactNode)
+    children: React.ReactNode | ((props: { animationDuration?: number; animationEasing?: string }) => React.ReactNode)
     animationDuration?: number
     animationEasing?: "ease" | "ease-in" | "ease-out" | "ease-in-out" | "linear"
   }
