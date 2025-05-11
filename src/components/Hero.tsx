@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Brain, ArrowRight, Activity, ChartBar, Database, Search, Briefcase, TrendingUp, BarChart3, ChartPie, Repeat } from 'lucide-react';
@@ -53,26 +54,51 @@ const portfolioData = [
 
 const COLORS = ['#9b87f5', '#33C3F0', '#FF8042', '#7E69AB', '#1EAEDB'];
 
+// Enhanced AI features with detailed data for each feature
 const AIFeatures = [
   {
     icon: <Brain className="h-5 w-5" />,
     title: "智慧資產分析",
-    description: "AI強化的資產淨值趨勢預測與風險識別"
+    description: "AI強化的資產淨值趨勢預測與風險識別",
+    chartType: "bar",
+    cardTitle: "資產淨值趨勢",
+    cardValue: "$5.43M",
+    insight: "分析顯示您的資產在8月達到高峰，建議關注流動性分配以優化年底稅務籌劃。",
+    chartData: mockData,
+    detailedDescription: "我們的AI算法分析您的資產組合，識別趨勢並提供前瞻性洞見，幫助您作出更明智的財務決策。"
   },
   {
     icon: <ChartBar className="h-5 w-5" />,
     title: "自動投資優化",
-    description: "基於市場行為的AI驅動投資策略調整"
+    description: "基於市場行為的AI驅動投資策略調整",
+    chartType: "pie",
+    cardTitle: "資產配置分析",
+    cardValue: "已優化",
+    insight: "根據您的風險偏好與市場波動，AI推薦增加10%的防禦性資產以平衡投資組合。",
+    chartData: pieData,
+    detailedDescription: "QuantaryX持續監控市場變化，並根據您的風險承受能力和投資目標，自動調整您的投資組合以獲得最佳收益。"
   },
   {
     icon: <Database className="h-5 w-5" />,
     title: "智能資料整合",
-    description: "多源財務數據自動解析與關聯構建"
+    description: "多源財務數據自動解析與關聯構建",
+    chartType: "line",
+    cardTitle: "數據整合概覽",
+    cardValue: "12個來源",
+    insight: "系統已自動整合12個金融機構的資料，並識別出3個重複計算的資產項目。",
+    chartData: portfolioData,
+    detailedDescription: "QuantaryX自動連接各金融機構和投資平台，集中顯示您的所有資產，消除數據孤島並提供統一視圖。"
   },
   {
     icon: <Search className="h-5 w-5" />,
     title: "投資機會識別",
-    description: "AI篩選高價值投資標的與市場時機"
+    description: "AI篩選高價值投資標的與市場時機",
+    chartType: "advanced",
+    cardTitle: "潛在投資機會",
+    cardValue: "5個推薦",
+    insight: "AI檢測到5檔符合您投資風格的高潛力標的，點擊查看詳細分析報告。",
+    chartData: null,
+    detailedDescription: "我們的AI系統不斷掃描全球市場，根據您的投資風格和目標，識別出最匹配您策略的投資機會。"
   }
 ];
 
@@ -174,7 +200,7 @@ const Hero = () => {
     setSelectedFeature(feature);
   };
 
-  const renderChart = (chartType: string) => {
+  const renderChart = (chartType: string, chartData: any) => {
     if (chartType === 'pie') {
       return (
         <ResponsiveContainer width="100%" height="100%">
@@ -326,38 +352,17 @@ const Hero = () => {
             <div className="relative mx-auto w-full rounded-lg shadow-lg lg:max-w-md">
               <div className="relative block w-full bg-white rounded-lg overflow-hidden">
                 <div className="w-full h-auto bg-gradient-to-br from-quantaryx-purple/50 to-quantaryx-brightblue/30 rounded-lg p-6">
-                  <div className="bg-white/90 backdrop-blur-sm rounded-xl shadow-xl animate-float p-6">
+                  <div className="bg-white/90 backdrop-blur-sm rounded-xl shadow-xl animate-float p-6 transition-all duration-300">
                     <div className="flex justify-between items-center mb-4">
                       <div className="flex items-center space-x-2">
                         <div className="w-3 h-3 bg-quantaryx-green rounded-full"></div>
-                        <span className="text-sm font-medium">資產總覽</span>
+                        <span className="text-sm font-medium">{AIFeatures[activeFeature].cardTitle}</span>
                       </div>
-                      <span className="text-2xl font-bold">$5.43M</span>
+                      <span className="text-2xl font-bold">{AIFeatures[activeFeature].cardValue}</span>
                     </div>
 
                     <div className="h-60 w-full">
-                      <ResponsiveContainer width="100%" height="100%">
-                        <BarChart data={mockData} barSize={20}>
-                          <CartesianGrid strokeDasharray="3 3" vertical={false} opacity={0.2} />
-                          <XAxis dataKey="month" fontSize={10} tickLine={false} axisLine={false} />
-                          <YAxis hide />
-                          <Tooltip 
-                            formatter={(value) => [`$${Number(value).toLocaleString()}`, '淨值']}
-                            cursor={{fill: 'rgba(155, 135, 245, 0.1)'}}
-                          />
-                          <Bar 
-                            dataKey="value" 
-                            fill="url(#colorGradient)" 
-                            radius={[4, 4, 0, 0]}
-                          />
-                          <defs>
-                            <linearGradient id="colorGradient" x1="0" y1="0" x2="0" y2="1">
-                              <stop offset="0%" stopColor="#9b87f5" />
-                              <stop offset="100%" stopColor="#c2b5fa" />
-                            </linearGradient>
-                          </defs>
-                        </BarChart>
-                      </ResponsiveContainer>
+                      {renderChart(AIFeatures[activeFeature].chartType, AIFeatures[activeFeature].chartData)}
                     </div>
                     
                     {showAIInsight && (
@@ -367,10 +372,7 @@ const Hero = () => {
                           <span className="text-sm font-medium text-quantaryx-darkblue">AI 智能洞察</span>
                         </div>
                         <p className="text-xs text-gray-600">
-                          {AIFeatures[activeFeature].title === "智慧資產分析" && "分析顯示您的資產在8月達到高峰，建議關注流動性分配以優化年底稅務籌劃。"}
-                          {AIFeatures[activeFeature].title === "自動投資優化" && "根據您的風險偏好與市場波動，AI推薦增加10%的防禦性資產以平衡投資組合。"}
-                          {AIFeatures[activeFeature].title === "智能資料整合" && "系統已自動整合12個金融機構的資料，並識別出3個重複計算的資產項目。"}
-                          {AIFeatures[activeFeature].title === "投資機會識別" && "AI檢測到5檔符合您投資風格的高潛力標的，點擊查看詳細分析報告。"}
+                          {AIFeatures[activeFeature].insight}
                         </p>
                       </div>
                     )}
@@ -502,7 +504,7 @@ const Hero = () => {
                 
                 <div>
                   <div className="h-64 bg-gray-50 rounded-lg p-4 mb-4">
-                    {renderChart(selectedFeature.chartType)}
+                    {renderChart(selectedFeature.chartType, null)}
                   </div>
                   
                   <div className="mt-3 p-4 bg-quantaryx-softblue/20 rounded-lg border border-quantaryx-softblue/30 animate-fade-in">
