@@ -15,14 +15,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ title, subtitle, icon, featur
   
   return (
     <div 
-      className="opacity-0 animate-fade-in" 
-      style={{ 
-        animationDelay: `${delay}ms`,
-        animationDuration: '1500ms',
-        animationTimingFunction: 'ease-out'
-      }}
+      className={`opacity-0 animate-fade-in`} 
+      style={{ animationDelay: `${delay}ms` }}
     >
-      <div className="h-full gradient-card rounded-xl shadow-md hover:shadow-lg transition-shadow duration-500 overflow-hidden border border-gray-100">
+      <div className="h-full gradient-card rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden border border-gray-100">
         <div className="p-6">
           <div className={`inline-flex items-center justify-center p-3 rounded-full mb-4 ${color}`}>
             {icon}
