@@ -1,8 +1,15 @@
-
 #root {
   width: 100%;
   margin: 0 auto;
   text-align: center;
+}
+
+.recharts-layer {
+  transition: transform 0.5s ease;
+}
+
+.recharts-responsive-container {
+  transition: opacity 0.3s ease-in-out;
 }
 
 .animate-delay-100 {

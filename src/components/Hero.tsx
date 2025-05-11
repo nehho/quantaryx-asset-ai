@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Brain, ArrowRight, Activity, ChartBar, Database, Search, Briefcase, TrendingUp, BarChart3, ChartPie, Repeat } from 'lucide-react';
@@ -215,6 +214,10 @@ const Hero = () => {
               paddingAngle={5}
               dataKey="value"
               label={({name, percent}) => `${name} ${(percent * 100).toFixed(0)}%`}
+              isAnimationActive={true}
+              animationBegin={0}
+              animationDuration={1500}
+              animationEasing="ease-out"
             >
               {pieData.map((entry, index) => (
                 <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
@@ -243,6 +246,10 @@ const Hero = () => {
               stroke="#9b87f5" 
               dot={false}
               strokeWidth={2}
+              isAnimationActive={true}
+              animationBegin={0}
+              animationDuration={1500}
+              animationEasing="ease-out"
             />
           </LineChart>
         </ResponsiveContainer>
@@ -272,6 +279,10 @@ const Hero = () => {
               dataKey="value" 
               fill="url(#colorGradient)" 
               radius={[4, 4, 0, 0]}
+              isAnimationActive={true}
+              animationBegin={0}
+              animationDuration={1500}
+              animationEasing="ease-out"
             />
             <defs>
               <linearGradient id="colorGradient" x1="0" y1="0" x2="0" y2="1">
