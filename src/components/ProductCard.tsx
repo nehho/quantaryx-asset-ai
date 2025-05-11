@@ -18,7 +18,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ title, subtitle, icon, featur
       className="opacity-0 animate-fade-in" 
       style={{ 
         animationDelay: `${delay}ms`,
-        animationDuration: '1000ms',
+        animationDuration: '1500ms',
         animationTimingFunction: 'ease-out'
       }}
     >
