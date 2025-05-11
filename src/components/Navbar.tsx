@@ -10,6 +10,17 @@ const Navbar = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const scrollToSection = (sectionId: string) => {
+    setIsMenuOpen(false);
+    const section = document.getElementById(sectionId);
+    if (section) {
+      window.scrollTo({
+        top: section.offsetTop - 80, // Offset for navbar height
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
     <nav className="fixed w-full bg-white/80 backdrop-blur-md z-50 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -19,14 +30,19 @@ const Navbar = () => {
           </div>
           
           <div className="hidden md:flex items-center space-x-8">
-            <a href="#products" className="font-medium text-gray-700 hover:text-quantaryx-purple transition-colors">產品</a>
-            <a href="#vision" className="font-medium text-gray-700 hover:text-quantaryx-purple transition-colors">願景</a>
-            <a href="#investors" className="font-medium text-gray-700 hover:text-quantaryx-purple transition-colors">投資者</a>
-            <a href="#contact" className="font-medium text-gray-700 hover:text-quantaryx-purple transition-colors">聯繫我們</a>
+            <button onClick={() => scrollToSection('products')} className="font-medium text-gray-700 hover:text-quantaryx-purple transition-colors">產品</button>
+            <button onClick={() => scrollToSection('vision')} className="font-medium text-gray-700 hover:text-quantaryx-purple transition-colors">願景</button>
+            <button onClick={() => scrollToSection('investors')} className="font-medium text-gray-700 hover:text-quantaryx-purple transition-colors">投資者</button>
+            <button onClick={() => scrollToSection('contact')} className="font-medium text-gray-700 hover:text-quantaryx-purple transition-colors">聯繫我們</button>
           </div>
           
           <div className="hidden md:flex items-center space-x-4">
-            <Button className="bg-quantaryx-darkblue hover:bg-quantaryx-darkblue/90">請求演示</Button>
+            <Button 
+              onClick={() => scrollToSection('contact')}
+              className="bg-quantaryx-darkblue hover:bg-quantaryx-darkblue/90"
+            >
+              請求演示
+            </Button>
           </div>
 
           {/* Mobile menu button */}
@@ -42,12 +58,17 @@ const Navbar = () => {
       {isMenuOpen && (
         <div className="md:hidden bg-white shadow-lg animate-fade-in">
           <div className="px-4 pt-2 pb-4 space-y-1">
-            <a href="#products" className="block py-3 px-4 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-md" onClick={toggleMenu}>產品</a>
-            <a href="#vision" className="block py-3 px-4 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-md" onClick={toggleMenu}>願景</a>
-            <a href="#investors" className="block py-3 px-4 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-md" onClick={toggleMenu}>投資者</a>
-            <a href="#contact" className="block py-3 px-4 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-md" onClick={toggleMenu}>聯繫我們</a>
+            <button onClick={() => scrollToSection('products')} className="block w-full text-left py-3 px-4 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-md">產品</button>
+            <button onClick={() => scrollToSection('vision')} className="block w-full text-left py-3 px-4 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-md">願景</button>
+            <button onClick={() => scrollToSection('investors')} className="block w-full text-left py-3 px-4 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-md">投資者</button>
+            <button onClick={() => scrollToSection('contact')} className="block w-full text-left py-3 px-4 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-md">聯繫我們</button>
             <div className="pt-2">
-              <Button className="bg-quantaryx-darkblue hover:bg-quantaryx-darkblue/90 w-full">請求演示</Button>
+              <Button 
+                onClick={() => scrollToSection('contact')} 
+                className="bg-quantaryx-darkblue hover:bg-quantaryx-darkblue/90 w-full"
+              >
+                請求演示
+              </Button>
             </div>
           </div>
         </div>

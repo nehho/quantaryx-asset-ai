@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/carousel";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { advancedFeatures } from './hero/constants';
 
 const mockData = [
   { month: '1月', value: 40 },
@@ -145,7 +146,7 @@ const advancedFeatures = [
   {
     id: "full-ai",
     title: "全AI體驗",
-    icon: <Brain className="h-6 w-6 text-quantaryx-purple" />,
+    icon: <Brain className="h-6 w-6 text-quantaryaryx-purple" />,
     description: "全方位AI助手為您管理財富",
     details: "我們的AI財富助手能夠理解您的長期財務目標，並主動提供見解、建議和決策支持，讓財富管理變得前所未有的簡單和智能。",
     chartType: "advanced",
@@ -172,6 +173,16 @@ const Hero = () => {
 
   const handleAdvancedFeatureClick = (feature: any) => {
     setSelectedFeature(feature);
+  };
+
+  const scrollToSection = (sectionId: string) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      window.scrollTo({
+        top: section.offsetTop - 80,
+        behavior: 'smooth'
+      });
+    }
   };
 
   const renderChart = (chartType: string) => {
@@ -283,10 +294,15 @@ const Hero = () => {
             
             <div className="opacity-0 animate-fade-in animate-delay-400 mt-8 sm:max-w-lg sm:mx-auto sm:text-center lg:text-left lg:mx-0">
               <div className="flex flex-col sm:flex-row sm:justify-center lg:justify-start gap-4">
-                <Button className="bg-quantaryx-purple hover:bg-quantaryx-purple/90 text-white px-8 py-6 text-lg">
+                <Button 
+                  onClick={() => scrollToSection('contact')}
+                  className="bg-quantaryx-purple hover:bg-quantaryx-purple/90 text-white px-8 py-6 text-lg">
                   開始使用
                 </Button>
-                <Button variant="outline" className="border-quantaryx-purple text-quantaryx-purple hover:bg-quantaryx-purple/10 px-8 py-6 text-lg">
+                <Button 
+                  onClick={() => scrollToSection('products')}
+                  variant="outline" 
+                  className="border-quantaryx-purple text-quantaryx-purple hover:bg-quantaryx-purple/10 px-8 py-6 text-lg">
                   了解更多
                 </Button>
               </div>
@@ -429,6 +445,7 @@ const Hero = () => {
                           variant="ghost" 
                           size="sm" 
                           className="text-quantaryx-purple mt-2 px-0"
+                          onClick={() => setSelectedFeature(feature)}
                         >
                           了解更多 <ArrowRight className="ml-1 h-4 w-4" />
                         </Button>
