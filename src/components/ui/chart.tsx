@@ -1,4 +1,3 @@
-
 import * as React from "react"
 import * as RechartsPrimitive from "recharts"
 
@@ -37,9 +36,7 @@ const ChartContainer = React.forwardRef<
   HTMLDivElement,
   React.ComponentProps<"div"> & {
     config: ChartConfig
-    children: React.ComponentProps<
-      typeof RechartsPrimitive.ResponsiveContainer
-    >["children"]
+    children: React.ReactNode | ((props: any) => React.ReactNode)
     animationDuration?: number
     animationEasing?: "ease" | "ease-in" | "ease-out" | "ease-in-out" | "linear"
   }
@@ -64,8 +61,8 @@ const ChartContainer = React.forwardRef<
       >
         <ChartStyle id={chartId} config={config} />
         <RechartsPrimitive.ResponsiveContainer>
-          {typeof children === "function" 
-            ? (props) => children({...props, animationDuration, animationEasing}) 
+          {typeof children === "function"
+            ? children({ animationDuration, animationEasing })
             : children}
         </RechartsPrimitive.ResponsiveContainer>
       </div>
